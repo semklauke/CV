@@ -3,6 +3,7 @@
 .DS_Store
 .texpadtmp
 .texpadtmp/
+*.synctex.gz
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
