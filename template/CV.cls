@@ -40,13 +40,15 @@
     a4paper,
     left=1cm,
     right=1cm,
-    top=2cm,
+    top=1.5cm,
     bottom=2cm
 }
 %% --------------------------------------------------- %%
 %% ------------------- Font/Color -------------------- %%
 %% --------------------------------------------------- %%
 \RequirePackage{FiraSans}
+\setmainfont{FiraSans}
+\newfontfamily\firasans{FiraSans}
 \RequirePackage[dvipsnames]{xcolor}
 \definecolor{CV_gray}{gray}{0.6}
 %% --------------------------------------------------- %%
@@ -58,6 +60,8 @@
     colorlinks=false
 ]{hyperref}
 \RequirePackage{fontawesome5}
+\RequirePackage{ragged2e}
+\RequirePackage{realboxes}
 %% --------------------------------------------------- %%
 %% -------------- Custom Logic commands -------------- %%
 %% --------------------------------------------------- %%
@@ -170,6 +174,7 @@
 % Print all contact info
 % ======================
 \newcommand{\printAllContactInfo}{%
+    {\renewcommand{\arraystretch}{1.1}%
     \begin{tabular}{l}
         \ifdefined\addedmail%
             \printmail{} \\%
@@ -200,12 +205,34 @@
         \fi%
         %\vspace*{-\baselineskip}
     \end{tabular}%
+    }%
 }%
 
 %% --------------------------------------------------- %%
 %% --------------------- Styling --------------------- %%
 %% --------------------------------------------------- %%
+\setlength{\headheight}{0pt}
+\setlength{\footheight}{0pt}
+\setlength{\parindent}{0pt}
 \AtBeginDocument[A]{
+    \pagestyle{empty}
+    \pagenumbering{gobble}
+    \begin{minipage}[t][2.4cm][c]{0.64\textwidth}\vspace{0cm}%
+        {
+        \fontsize{45}{50}\selectfont
+        \printfirstname{}\\[0.12\baselineskip]
+        \printlastname{}%
+        }
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[t][2.4cm][c]{0.35\textwidth}\vspace{0cm}%
+        \printAllContactInfo{}%
+    \end{minipage}
+    \vspace{\baselineskip}%
+    \hrule%
+    \vspace{\baselineskip}%
+    \begin{minipage}[t][0pt]{\linewidth}
+    %%%% in atenddocuemnt open the two minipages for 2 columns if a command in the meantime requested it (counter)
 }
 %%%%% Later load packages so \PassOptionToPackage{} can reach them
 \RequirePackage{babel}
